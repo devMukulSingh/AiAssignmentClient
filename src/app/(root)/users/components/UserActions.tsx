@@ -19,7 +19,7 @@ type Props = {
 };
 
 const UserActions = ({ data }: Props) => {
-  const { invalidateQueries  } = useQueryClient();
+  const  queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutate,isPending } = useMutation({
     mutationFn: async() => {
@@ -30,7 +30,7 @@ const UserActions = ({ data }: Props) => {
     onSuccess(){
       setIsOpen(false);
       toast.success(`User deleted`);
-      invalidateQueries({queryKey:['users']});
+      queryClient.invalidateQueries({queryKey:['users']})
     }
   })
   return (

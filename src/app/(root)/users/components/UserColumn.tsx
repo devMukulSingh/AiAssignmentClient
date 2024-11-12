@@ -21,7 +21,7 @@ export const UserColumn: ColumnDef<TUserTable>[] = [
   {
     accessorKey: "createdAt",
     header: "Date added",
-    cell: ({ row }) => <>{format(row.original.createdAt, "PP- p")}</>,
+    cell: ({ row }) => <>{format(row.original.createdAt, "PP - p")}</>,
   },
   {
     id: "actions",

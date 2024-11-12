@@ -5,6 +5,9 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import toast from "react-hot-toast";
@@ -16,12 +19,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useSearchParams } from "next/navigation";
+import PaginationButtons from "./PaginationButtons";
 
 type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
 };
 
 export default function DataTable<TData, TValue>({ columns }: Props<TData,TValue> )  {
+  const page = Number(useSearchParams().get("page")) || 1;
+  // const query = useSearchParams().get("query");
+  const pageSize = 10;
   const {
     data,
     isError,
@@ -33,16 +41,26 @@ export default function DataTable<TData, TValue>({ columns }: Props<TData,TValue
       return response.json();
     },
   });
-  console.log(data?.data);
 
   if (isError) {
     console.log(error);
     toast.error(error.message);
   }
   const table = useReactTable({
-    data:data?.data || [],
+    data: data?.data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    // state: {
+    //   pagination: {
+    //     pageIndex: page,
+    //     pageSize,
+    //   },
+    // },
+    // manualPagination: true,
+    // enableSorting: true,
   });
 
   return (
@@ -94,6 +112,7 @@ export default function DataTable<TData, TValue>({ columns }: Props<TData,TValue
           )}
         </TableBody>
       </Table>
+      {/* <PaginationButtons totalPages={data.totalPages}/> */}
     </div>
   );
 };
