@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import DataTable from "./DataTable";
 import { UserColumn } from "./UserColumn";
 
@@ -7,7 +8,9 @@ const UsersList = (props: Props) => {
   return (
     <div className="flex flex-col gap-5 w-full items-center ">
       <h1>Users</h1>
-      <DataTable columns={UserColumn} />
+      <Suspense>
+        <DataTable columns={UserColumn} />
+      </Suspense>
     </div>
   );
 };

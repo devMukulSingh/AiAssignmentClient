@@ -29,9 +29,9 @@ const NavLinks = (props: Props) => {
       {links.map((link, index) => (
         <Link
           className={cn(
-            "transition-all duration-500  text-lg",`${link.isActive ? "font-bold underline text-slate-500  " : " "} `
-          )
-        }
+            "transition-all duration-500  text-lg",
+            `${link.isActive ? "font-bold underline text-slate-500  " : " "} `,
+          )}
           href={link.href}
           key={index}
         >

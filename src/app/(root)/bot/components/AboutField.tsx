@@ -1,15 +1,21 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { UseFormReturn } from 'react-hook-form';
-import { formValues } from './BotForm';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { UseFormReturn } from "react-hook-form";
+import { formValues } from "./BotForm";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 type Props = {
-    form:UseFormReturn<formValues,any,undefined>
-    isPending:boolean
-}
+  form: UseFormReturn<formValues, any, undefined>;
+  isPending: boolean;
+};
 
-const AboutField = ({form,isPending}: Props) => {
+const AboutField = ({ form, isPending }: Props) => {
   return (
     <FormField
       disabled={isPending}
@@ -26,6 +32,6 @@ const AboutField = ({form,isPending}: Props) => {
       )}
     />
   );
-}
+};
 
-export default AboutField
+export default AboutField;

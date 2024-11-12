@@ -21,9 +21,9 @@ const PaginationButtons = ({ totalPages }: Props) => {
     page + 2 > totalPages && page != 1
       ? page - 3
       : page < 2
-      ? page - 1
-      : page - 2,
-    page + 2 < totalPages ? page + 2 : totalPages
+        ? page - 1
+        : page - 2,
+    page + 2 < totalPages ? page + 2 : totalPages,
   );
 
   return (

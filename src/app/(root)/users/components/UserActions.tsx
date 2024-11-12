@@ -19,27 +19,27 @@ type Props = {
 };
 
 const UserActions = ({ data }: Props) => {
-  const  queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { mutate,isPending } = useMutation({
-    mutationFn: async() => {
-      await fetch(`${base_url_server}/user/${data.id}/delete-user`,{
-        method: 'DELETE',
-      })
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => {
+      await fetch(`${base_url_server}/user/${data.id}/delete-user`, {
+        method: "DELETE",
+      });
     },
-    onSuccess(){
+    onSuccess() {
       setIsOpen(false);
       toast.success(`User deleted`);
-      queryClient.invalidateQueries({queryKey:['users']})
-    }
-  })
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+  });
   return (
     <div>
       <AlertModal
         isOpen={isOpen}
         loading={isPending}
         onClose={() => setIsOpen(false)}
-        onConform={ () => mutate()}
+        onConform={() => mutate()}
       />
       <DropdownMenu>
         <DropdownMenuTrigger>

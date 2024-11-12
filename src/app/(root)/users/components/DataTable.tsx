@@ -26,15 +26,13 @@ type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
 };
 
-export default function DataTable<TData, TValue>({ columns }: Props<TData,TValue> )  {
+export default function DataTable<TData, TValue>({
+  columns,
+}: Props<TData, TValue>) {
   const page = Number(useSearchParams().get("page")) || 1;
   // const query = useSearchParams().get("query");
   const pageSize = 10;
-  const {
-    data,
-    isError,
-    error,
-  } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const response = await fetch(`${base_url_server}/user/get-users`);
@@ -76,7 +74,7 @@ export default function DataTable<TData, TValue>({ columns }: Props<TData,TValue
                       <div>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                       </div>
                     )}
@@ -115,5 +113,4 @@ export default function DataTable<TData, TValue>({ columns }: Props<TData,TValue
       {/* <PaginationButtons totalPages={data.totalPages}/> */}
     </div>
   );
-};
-
+}

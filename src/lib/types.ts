@@ -1,4 +1,4 @@
 export interface IapiResponse<IData> {
-    data: IData;
-    message: string;
+  data: IData;
+  message: string;
 }
