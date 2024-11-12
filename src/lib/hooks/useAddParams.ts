@@ -11,15 +11,16 @@ const useAddParams = () => {
         const params = new URLSearchParams(searchParams);
 
         // Loop through the newParams object and append or update the query params
-        Object.keys(newParams).forEach((key) => {
-            if (newParams[key] === undefined) {
-                params.delete(key); // Optionally remove params if value is undefined
-            } else {
-                params.set(key, newParams[key]);
-            }
-        });
-        // Push the new URL with the updated search params
-        router.push(`?${params.toString()}`);
+
+            Object.keys(newParams).forEach((key) => {
+                if (newParams[key] === undefined) {
+                    params.delete(key); // Optionally remove params if value is undefined
+                } else {
+                    params.set(key, newParams[key]);
+                }
+            });
+            // Push the new URL with the updated search params
+            router.push(`?${params.toString()}`);
     };
 
     return { addSearchParams };

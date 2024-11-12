@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 type Props = {};
 
-const page = (props: Props) => {
+const ApiKeysPage = (props: Props) => {
   const { getToken } = useAuth();
   const { isPending, data } = useQuery<IapiResponse<{ token: string }>>({
     queryKey: ["bot_token"],
@@ -44,4 +44,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default ApiKeysPage;

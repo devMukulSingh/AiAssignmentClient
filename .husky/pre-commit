@@ -1,0 +1,4 @@
+
+npx tsc --noemit
+pnpm run lint 
+pnpx prettier . --write
