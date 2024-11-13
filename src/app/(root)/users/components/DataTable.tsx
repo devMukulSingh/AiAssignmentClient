@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/table";
 import { useSearchParams } from "next/navigation";
 
-
 type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
 };
@@ -36,7 +35,7 @@ export default function DataTable<TData, TValue>({
     queryKey: ["users"],
     queryFn: async () => {
       const response = await fetch(`${base_url_server}/user/get-users`, {
-        cache:"no-cache"
+        cache: "no-cache",
       });
       return response.json();
     },

@@ -22,7 +22,7 @@ type Props = {};
 export type formValues = z.infer<typeof botSchema>;
 
 const BotForm = (props: Props) => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
     queryKey: ["bot_data"],
     queryFn: async () => {
@@ -45,7 +45,7 @@ const BotForm = (props: Props) => {
         method: "PUT",
       }).then((res) => res.json());
       toast.success("Bot updated ");
-      queryClient.invalidateQueries({queryKey: ['bot_data']})
+      queryClient.invalidateQueries({ queryKey: ["bot_data"] });
       return res;
     },
   });

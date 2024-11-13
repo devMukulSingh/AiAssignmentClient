@@ -20,7 +20,7 @@ type Props = {
 };
 
 const UserActions = ({ data }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutate, isPending } = useMutation({
@@ -49,9 +49,7 @@ const UserActions = ({ data }: Props) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem>
-            <Edit className="w-4 h-4 mr-3" /> Block
-          </DropdownMenuItem>
+
           <DropdownMenuItem onClick={() => setIsOpen(true)}>
             <Trash className="w-4 h-4 mr-3" /> Delete
           </DropdownMenuItem>
