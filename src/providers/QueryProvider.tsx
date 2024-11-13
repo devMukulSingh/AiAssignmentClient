@@ -6,9 +6,10 @@ import toast from "react-hot-toast";
 const QueryProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
+
       queries: {
         staleTime: Infinity,
-        gcTime:Infinity,
+        gcTime: Infinity,
         refetchOnWindowFocus: false,
         retry: false,
       },

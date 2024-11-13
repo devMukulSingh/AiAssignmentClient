@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/table";
 import { useSearchParams } from "next/navigation";
 import PaginationButtons from "./PaginationButtons";
+import { useAuth } from "@clerk/nextjs";
 
 type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -29,13 +30,19 @@ type Props<TData, TValue> = {
 export default function DataTable<TData, TValue>({
   columns,
 }: Props<TData, TValue>) {
+    const { getToken } = useAuth();
   const page = Number(useSearchParams().get("page")) || 1;
   // const query = useSearchParams().get("query");
   const pageSize = 10;
   const { data, isError, error } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const response = await fetch(`${base_url_server}/user/get-users`);
+      const response = await fetch(`${base_url_server}/user/get-users`, {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+          "Cache-control": "max-age=10000",
+        },
+      });
       return response.json();
     },
   });
@@ -74,7 +81,7 @@ export default function DataTable<TData, TValue>({
                       <div>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                       </div>
                     )}

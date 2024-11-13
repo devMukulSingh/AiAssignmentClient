@@ -17,6 +17,7 @@ const ApiKeysPage = (props: Props) => {
       return await fetch(`${base_url_server}/apikeys/get-apikeys`, {
         headers: {
           Authorization: `Bearer ${await getToken()}`,
+         'Cache-control' : "max-age=10000"
         },
       }).then((res) => res.json());
     },

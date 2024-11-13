@@ -9,5 +9,3 @@ export const base_url_server =
   process.env.NODE_ENV === "production"
     ? "https://aiassignment.onrender.com/api"
     : `http://localhost:8000/api`;
-
-
