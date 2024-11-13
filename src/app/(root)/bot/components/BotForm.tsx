@@ -22,12 +22,16 @@ type Props = {};
 export type formValues = z.infer<typeof botSchema>;
 
 const BotForm = (props: Props) => {
+    const router = useRouter();
   const queryClient = useQueryClient();
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
     queryKey: ["bot_data"],
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
-        cache: "no-cache",
+        cache: "force-cache",
+        next: {
+          revalidate: 10,
+        },
       }).then((res) => res.json());
       return data;
     },
@@ -45,7 +49,7 @@ const BotForm = (props: Props) => {
         method: "PUT",
       }).then((res) => res.json());
       toast.success("Bot updated ");
-      queryClient.invalidateQueries({ queryKey: ["bot_data"] });
+      router.refresh();
       return res;
     },
   });
