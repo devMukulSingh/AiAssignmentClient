@@ -12,7 +12,9 @@ const ApiKeysPage = (props: Props) => {
   const { data } = useQuery<IapiResponse<{ token: string }>>({
     queryKey: ["bot_token"],
     queryFn: async () => {
-      return await fetch(`${base_url_server}/apikeys/get-apikeys`).then((res) => res.json());
+      return await fetch(`${base_url_server}/apikeys/get-apikeys`, {
+        cache: "force-cache",
+      }).then((res) => res.json());
     },
   });
   const handleCopy = () => {

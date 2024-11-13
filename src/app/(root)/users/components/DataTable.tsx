@@ -37,7 +37,10 @@ export default function DataTable<TData, TValue>({
   const { data, isError, error } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const response = await fetch(`${base_url_server}/user/get-users`);
+      const response = await fetch(`${base_url_server}/user/get-users`, {
+        cache: "force-cache",
+
+      });
       return response.json();
     },
   });

@@ -23,7 +23,10 @@ const BotForm = (props: Props) => {
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
     queryKey: ["bot-data"],
     queryFn: async () => {
-      const data = await fetch(`${base_url_server}/bot/get-botDetails`).then((res) => res.json());
+      const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
+        cache: "force-cache",
+
+      }).then((res) => res.json());
       return data;
     },
   });
