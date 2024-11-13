@@ -36,6 +36,7 @@ export default function DataTable<TData, TValue>({
     queryFn: async () => {
       const response = await fetch(`${base_url_server}/user/get-users`, {
         cache: "force-cache",
+        
         next: {
           revalidate: 10,
         },

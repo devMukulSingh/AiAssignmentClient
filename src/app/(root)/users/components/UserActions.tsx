@@ -32,9 +32,8 @@ const UserActions = ({ data }: Props) => {
     onSuccess() {
       setIsOpen(false);
       toast.success(`User deleted`);
-      router.refresh();
-      queryClient.invalidateQueries({ queryKey: ["users"], exact: true });
-      // queryClient.refetchQueries({queryKey:['users']})
+      // queryClient.invalidateQueries({ queryKey: ["users"], exact: true });
+      queryClient.refetchQueries({queryKey:['users']})
     },
   });
   return (
