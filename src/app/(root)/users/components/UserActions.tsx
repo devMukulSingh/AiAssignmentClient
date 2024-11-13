@@ -32,7 +32,7 @@ const UserActions = ({ data }: Props) => {
       setIsOpen(false);
       toast.success(`User deleted`);
       revalidateTag("users");
-        // router.refresh()
+      // router.refresh()
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });

@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
+import { revalidateTag } from "next/cache";
 
 type Props = {};
 
@@ -21,11 +22,15 @@ export type formValues = z.infer<typeof botSchema>;
 
 const BotForm = (props: Props) => {
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
-    queryKey: ["bot-data"],
+    queryKey: ["bot_data"],
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
+        next:{
+          tags:['bot_data']
+        },
         cache: "force-cache",
       }).then((res) => res.json());
+      revalidateTag("bot_data");
       return data;
     },
   });
