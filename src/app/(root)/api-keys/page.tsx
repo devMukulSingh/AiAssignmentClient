@@ -18,11 +18,9 @@ const ApiKeysPage = (props: Props) => {
         cache: "force-cache",
         next: {
           revalidate: false,
+          
         },
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-          "Cache-control": "max-age=10000",
-        },
+
       }).then((res) => res.json());
     },
   });

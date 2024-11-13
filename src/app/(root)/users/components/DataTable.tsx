@@ -42,10 +42,6 @@ export default function DataTable<TData, TValue>({
         next: {
           revalidate: false,
         },
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-          "Cache-control": "max-age=10000",
-        },
       });
       return response.json();
     },

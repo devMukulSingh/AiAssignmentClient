@@ -29,10 +29,7 @@ const BotForm = (props: Props) => {
         next: {
           revalidate: false,
         },
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-          "Cache-control": "max-age=10000",
-        },
+
       }).then((res) => res.json());
       return data;
     },
