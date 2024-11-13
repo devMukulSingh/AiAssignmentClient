@@ -25,12 +25,11 @@ const BotForm = (props: Props) => {
     queryKey: ["bot_data"],
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
-        next:{
-          tags:['bot_data']
+        next: {
+          tags: ["bot_data"],
         },
         cache: "force-cache",
       }).then((res) => res.json());
-      revalidateTag("bot_data");
       return data;
     },
   });
@@ -47,6 +46,7 @@ const BotForm = (props: Props) => {
         method: "PUT",
       }).then((res) => res.json());
       toast.success("Bot updated ");
+      revalidateTag("bot_data");
       return res;
     },
   });
