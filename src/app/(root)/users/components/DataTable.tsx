@@ -30,7 +30,7 @@ type Props<TData, TValue> = {
 export default function DataTable<TData, TValue>({
   columns,
 }: Props<TData, TValue>) {
-    const { getToken } = useAuth();
+  const { getToken } = useAuth();
   const page = Number(useSearchParams().get("page")) || 1;
   // const query = useSearchParams().get("query");
   const pageSize = 10;
@@ -38,9 +38,9 @@ export default function DataTable<TData, TValue>({
     queryKey: ["users"],
     queryFn: async () => {
       const response = await fetch(`${base_url_server}/user/get-users`, {
+        cache:"force-cache",
         headers: {
           Authorization: `Bearer ${await getToken()}`,
-          "Cache-control": "max-age=10000",
         },
       });
       return response.json();
@@ -81,7 +81,7 @@ export default function DataTable<TData, TValue>({
                       <div>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                       </div>
                     )}
