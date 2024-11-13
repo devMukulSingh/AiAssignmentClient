@@ -13,7 +13,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { base_url_server } from "@/lib/utils";
 import { AlertModal } from "@/components/AlertModal";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
 import { revalidateTag } from "next/cache";
 
 type Props = {
@@ -21,7 +20,6 @@ type Props = {
 };
 
 const UserActions = ({ data }: Props) => {
-  const router = useRouter()
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutate, isPending } = useMutation({
@@ -33,8 +31,8 @@ const UserActions = ({ data }: Props) => {
     onSuccess() {
       setIsOpen(false);
       toast.success(`User deleted`);
-      revalidateTag('users')
-      // router.refresh()
+      revalidateTag("users");
+        // router.refresh()
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
