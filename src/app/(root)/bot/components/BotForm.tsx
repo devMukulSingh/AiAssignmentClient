@@ -74,7 +74,12 @@ const BotForm = (props: Props) => {
           <AboutField form={form} isPending={isFetching} />
           <DescriptionField form={form} isPending={isFetching} />
         </div>
-        <Button className="mt-10 sm:w-1/3 self-center w-full">Edit Bot</Button>
+        <Button
+          disabled={isFetching || isPending}
+          className="mt-10 sm:w-1/3 self-center w-full"
+        >
+          Edit Bot
+        </Button>
       </form>
     </Form>
   );
