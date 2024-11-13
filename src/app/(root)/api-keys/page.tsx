@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { IapiResponse } from "@/lib/types";
 import { base_url_server } from "@/lib/utils";
-import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
 import toast from "react-hot-toast";
@@ -10,18 +9,10 @@ import toast from "react-hot-toast";
 type Props = {};
 
 const ApiKeysPage = (props: Props) => {
-  const { getToken } = useAuth();
-  const { isPending, data } = useQuery<IapiResponse<{ token: string }>>({
+  const { data } = useQuery<IapiResponse<{ token: string }>>({
     queryKey: ["bot_token"],
     queryFn: async () => {
-      return await fetch(`${base_url_server}/apikeys/get-apikeys`, {
-        cache: "force-cache",
-        next: {
-          revalidate: false,
-          
-        },
-
-      }).then((res) => res.json());
+      return await fetch(`${base_url_server}/apikeys/get-apikeys`).then((res) => res.json());
     },
   });
   const handleCopy = () => {

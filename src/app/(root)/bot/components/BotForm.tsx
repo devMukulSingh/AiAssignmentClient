@@ -20,17 +20,10 @@ type Props = {};
 export type formValues = z.infer<typeof botSchema>;
 
 const BotForm = (props: Props) => {
-  const { getToken } = useAuth();
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
     queryKey: ["bot-data"],
     queryFn: async () => {
-      const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
-        cache: "force-cache",
-        next: {
-          revalidate: false,
-        },
-
-      }).then((res) => res.json());
+      const data = await fetch(`${base_url_server}/bot/get-botDetails`).then((res) => res.json());
       return data;
     },
   });
