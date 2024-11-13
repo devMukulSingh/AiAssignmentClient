@@ -22,13 +22,13 @@ type Props = {};
 export type formValues = z.infer<typeof botSchema>;
 
 const BotForm = (props: Props) => {
-    const router = useRouter();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
     queryKey: ["bot_data"],
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
-        cache: "force-cache",
+        cache: "default",
         next: {
           revalidate: 10,
         },

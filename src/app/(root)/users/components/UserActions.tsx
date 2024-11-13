@@ -32,7 +32,7 @@ const UserActions = ({ data }: Props) => {
     onSuccess() {
       setIsOpen(false);
       toast.success(`User deleted`);
-      router.refresh()
+      router.refresh();
     },
   });
   return (
