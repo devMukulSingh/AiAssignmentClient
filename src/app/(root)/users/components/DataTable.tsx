@@ -38,7 +38,10 @@ export default function DataTable<TData, TValue>({
     queryKey: ["users"],
     queryFn: async () => {
       const response = await fetch(`${base_url_server}/user/get-users`, {
-        cache:"force-cache",
+        cache: "force-cache",
+        next: {
+          revalidate: false,
+        },
         headers: {
           Authorization: `Bearer ${await getToken()}`,
         },

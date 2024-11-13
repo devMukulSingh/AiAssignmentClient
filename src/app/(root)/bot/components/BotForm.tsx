@@ -26,6 +26,9 @@ const BotForm = (props: Props) => {
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
         cache: "force-cache",
+        next:{
+          revalidate:false
+        },
         headers: {
           Authorization: `Bearer ${await getToken()}`,
         },
