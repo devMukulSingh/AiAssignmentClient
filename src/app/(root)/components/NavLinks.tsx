@@ -28,7 +28,6 @@ const NavLinks = (props: Props) => {
     <div className="flex gap-10">
       {links.map((link, index) => (
         <Link
-          prefetch={true}
           className={cn(
             "transition-all duration-500  text-lg",
             `${link.isActive ? "font-bold underline text-slate-500  " : " "} `,

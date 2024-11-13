@@ -1,6 +1,6 @@
 "use client";
 import { base_url_server } from "@/lib/utils";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { botSchema } from "@/lib/schema";
@@ -15,26 +15,25 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
 import { revalidateTag } from "next/cache";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 export type formValues = z.infer<typeof botSchema>;
 
 const BotForm = (props: Props) => {
+  const queryClient = useQueryClient()
   const { isFetching, isFetched, data } = useQuery<IapiResponse<formValues>>({
     queryKey: ["bot_data"],
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
-        next: {
-          tags: ["bot_data"],
-        },
-        cache: "force-cache",
+        cache: "no-cache",
       }).then((res) => res.json());
       return data;
     },
   });
 
-  ///////////////////////
+  //////////////////////////////////////////////
   const { mutate, isPending } = useMutation<IapiResponse<{}>, any, formValues>({
     mutationKey: ["update-bot"],
     mutationFn: async (data) => {
@@ -46,11 +45,11 @@ const BotForm = (props: Props) => {
         method: "PUT",
       }).then((res) => res.json());
       toast.success("Bot updated ");
-      revalidateTag("bot_data");
+      queryClient.invalidateQueries({queryKey: ['bot_data']})
       return res;
     },
   });
-  ////////////////
+  ///////////////////////////////////////
   const form = useForm<formValues>({
     resolver: zodResolver(botSchema),
     defaultValues: {

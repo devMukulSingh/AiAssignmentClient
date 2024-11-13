@@ -20,8 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useSearchParams } from "next/navigation";
-import PaginationButtons from "./PaginationButtons";
-import { useAuth } from "@clerk/nextjs";
+
 
 type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -30,7 +29,6 @@ type Props<TData, TValue> = {
 export default function DataTable<TData, TValue>({
   columns,
 }: Props<TData, TValue>) {
-  const { getToken } = useAuth();
   const page = Number(useSearchParams().get("page")) || 1;
   // const query = useSearchParams().get("query");
   const pageSize = 10;
@@ -38,10 +36,7 @@ export default function DataTable<TData, TValue>({
     queryKey: ["users"],
     queryFn: async () => {
       const response = await fetch(`${base_url_server}/user/get-users`, {
-        cache: "force-cache",
-        next: {
-          tags: ["users"],
-        },
+        cache:"no-cache"
       });
       return response.json();
     },

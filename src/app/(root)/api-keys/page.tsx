@@ -13,7 +13,7 @@ const ApiKeysPage = (props: Props) => {
     queryKey: ["bot_token"],
     queryFn: async () => {
       return await fetch(`${base_url_server}/apikeys/get-apikeys`, {
-        cache: "force-cache",
+        cache: "no-cache",
       }).then((res) => res.json());
     },
   });
