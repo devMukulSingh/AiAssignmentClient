@@ -25,7 +25,6 @@ const BotForm = (props: Props) => {
     queryFn: async () => {
       const data = await fetch(`${base_url_server}/bot/get-botDetails`, {
         cache: "force-cache",
-
       }).then((res) => res.json());
       return data;
     },
