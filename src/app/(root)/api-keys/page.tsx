@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { IapiResponse } from "@/lib/types";
 import { base_url_server } from "@/lib/utils";
 import { useAuth } from "@clerk/nextjs";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -21,12 +21,14 @@ const ApiKeysPage = (props: Props) => {
         },
         headers: {
           Authorization: `Bearer ${await getToken()}`,
+          "Cache-control": "max-age=10000",
         },
       }).then((res) => res.json());
     },
   });
   const handleCopy = () => {
-    window.navigator.clipboard.writeText("");
+    if(data?.data.token)
+    window.navigator.clipboard.writeText(data?.data.token);
     toast.success("Api copied");
   };
   return (
