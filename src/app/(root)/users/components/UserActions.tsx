@@ -14,6 +14,7 @@ import { base_url_server } from "@/lib/utils";
 import { AlertModal } from "@/components/AlertModal";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 type Props = {
   data: TUserTable;
@@ -32,8 +33,16 @@ const UserActions = ({ data }: Props) => {
     onSuccess() {
       setIsOpen(false);
       toast.success(`User deleted`);
-      // queryClient.invalidateQueries({ queryKey: ["users"], exact: true });
-      queryClient.refetchQueries({queryKey:['users']})
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+        exact: true,
+      });
+      // revalidatePath('/users')
+          // queryClient.refetchQueries({
+          //   queryKey: ["users"],
+          //   stale: true,
+          //   type: "all",
+          // });
     },
   });
   return (
