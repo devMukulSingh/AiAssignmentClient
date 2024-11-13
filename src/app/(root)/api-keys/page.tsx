@@ -15,7 +15,7 @@ const ApiKeysPage = (props: Props) => {
       return await fetch(`${base_url_server}/apikeys/get-apikeys`, {
         cache: "default",
         next: {
-          revalidate: 10,
+          revalidate: 1000,
         },
       }).then((res) => res.json());
     },
